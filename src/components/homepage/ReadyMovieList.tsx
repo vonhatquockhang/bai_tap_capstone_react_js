@@ -1,4 +1,3 @@
-// components/homepage/MovieList.tsx
 "use client";
 
 import { useEffect, useState, useRef } from "react";
@@ -10,23 +9,23 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import Link from "next/link";
+
 interface Movie {
   maPhim: number;
   tenPhim: string;
   hinhAnh: string;
   danhGia: number;
-  dangChieu: boolean;
   sapChieu: boolean;
+  dangChieu: boolean;
 }
 
-export default function MovieList() {
+export default function ReadyMovieList() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const carouselRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     fetch(
-      "https://movienew.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01",
+      "https://movienew.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhimTheoNgay?maNhom=GP01&tenPhim=a&soTrang=1&soPhanTuTrenTrang=10&tuNgay=21%2F10%2F2024&denNgay=11%2F12%2F2025",
       {
         headers: {
           TokenCybersoft:
@@ -37,7 +36,10 @@ export default function MovieList() {
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data.content)) {
-          setMovies(data.content);
+          const upcomingMovies = data.content.filter((movie: Movie) => {
+            return movie.sapChieu && !movie.dangChieu;
+          });
+          setMovies(upcomingMovies);
         } else {
           console.error("Invalid movie data:", data);
           setMovies([]);
@@ -45,7 +47,6 @@ export default function MovieList() {
       })
       .catch((err) => console.error("Fetch error:", err));
   }, []);
-
   useEffect(() => {
     const interval = setInterval(() => {
       if (carouselRef.current) {
@@ -61,15 +62,7 @@ export default function MovieList() {
 
   return (
     <section className="w-full max-w-6xl mx-auto px-4 py-10">
-      <div className="flex justify-between">
-        <h2 className="text-2xl font-bold text-white mb-6">🎞 Danh sách phim</h2>
-        <Link
-          href="/homepage/AllMovies"
-          className="text-sm font-medium text-yellow-400 hover:underline"
-        >
-          Tất cả phim đang chiếu →
-        </Link>
-      </div>
+      <h2 className="text-2xl font-bold text-white mb-6">🎬 Sắp ra mắt</h2>
       <Carousel
         className="w-full transition-transform duration-700 ease-in-out"
         ref={carouselRef}

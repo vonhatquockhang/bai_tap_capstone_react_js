@@ -90,6 +90,7 @@ export default function AllMovies() {
             hinhAnh={movie.hinhAnh}
             danhGia={movie.danhGia}
             maPhim={movie.maPhim}
+           dangChieu={true}
           />
         ))}
       </div>

@@ -16,7 +16,7 @@ export default function ShowTimesForMovie({ showtimes }: Props) {
 
   const handleBooking = () => {
     if (selectedShowtime) {
-      router.push(`/booking/${selectedShowtime}`);
+      router.push(`/homepage/${selectedShowtime}/booking`);
     }
   };
 

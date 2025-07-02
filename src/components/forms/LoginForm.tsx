@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { dangNhapNguoiDung } from "@/lib/auth";
+import bgImage from "@/img/cinema-bg.jpg";
 
 export default function LoginForm() {
   const [taiKhoan, setTaiKhoan] = useState("");
@@ -43,10 +44,10 @@ export default function LoginForm() {
   };
 
   return (
-    <div
-      className="min-h-screen bg-cover bg-center flex items-center justify-center"
-      style={{ backgroundImage: 'url("/img/cinema-bg.jpg")' }}
-    >
+   <div
+  className="min-h-screen bg-cover bg-center flex items-center justify-center"
+  style={{ backgroundImage: `url(${bgImage.src})` }}
+>
       <form
         onSubmit={handleSubmit}
         className="bg-black bg-opacity-80 text-white p-8 rounded-xl w-full max-w-md shadow-2xl"

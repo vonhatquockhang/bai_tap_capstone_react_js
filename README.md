@@ -1,4 +1,5 @@
 Võ Thành Danh: Làm phần Homepage, trang chi tiết phim , đặt vé showtime
+
 Võ Nhật Quốc Khang: Login, Logout, Trang thanh toán, trang đặt vé. 
 
 Cả hai chỉ mới gọi API và chưa có tích hợp redux và chưa tạo trang admin.
